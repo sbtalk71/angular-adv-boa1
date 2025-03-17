@@ -1,5 +1,40 @@
+
 <h2>New Directives</h2>
+@defer (on timer(10s)) {
 @let discountedPrice=price*(1-discount);
 <h2>The discounted Price is {{discountedPrice|currency}}</h2>
-<h2></h2>
 
+<hr>
+<ul>
+@for (user of users;track user.id){
+    <li>{{user.name}}</li>
+}
+</ul>
+
+<ul >
+    <li *ngFor="let user of users">{{user.name}}</li>
+</ul>
+
+@if (isAdmin) {
+    <h2>Welcome Admin {{user.name}}</h2>
+}@else {
+    <h2>Others Not Permitted</h2>
+}
+}@placeholder{
+    <h2>Loading...</h2>
+}
+<h2>Switch Case Demo</h2>
+@switch (status) {
+    @case ('loading') {
+            <h2>....Data Loading</h2>
+    }
+    @case ('success') {
+        <h2>Data Loaded Successfully</h2>
+    }
+    @case ('error') {
+        <h2>Error!! while fetching data</h2>
+    }
+    @default {
+        <h2>Status Unknown</h2>
+    }
+}
