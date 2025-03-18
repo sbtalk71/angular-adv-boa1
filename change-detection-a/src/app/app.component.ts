@@ -1,9 +1,10 @@
 import { Component, DoCheck } from '@angular/core';
 import { ChildAComponent } from './child-a/child-a.component';
+import { TrackbyComponent } from './trackby/trackby.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ChildAComponent],
+  imports: [TrackbyComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,0 +1,6 @@
+
+<ul>
+    <li *ngFor="let user of users; trackBy: trackById">{{user.name}}</li>
+</ul>
+
+<button (click)="updateData()">Refresh</button>
