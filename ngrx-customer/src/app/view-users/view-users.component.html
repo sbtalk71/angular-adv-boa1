@@ -1,0 +1,8 @@
+<p>view-users works!</p>
+
+    <ul>
+        <li *ngFor="let user of userData$|async">{{user.name}}</li>
+    </ul>
+
+    <input type="text" #nameField>
+    <button (click)="addTheUser(nameField.value)">Add User</button>
