@@ -1,0 +1,30 @@
+<h2>User Registration Form</h2>
+<hr>
+<div style="margin-left: 30px;">
+    <form [formGroup]='userForm'>
+        <div>
+            <label> Name:
+                <input type="text" formControlName="userName" name="userName">
+                <small *ngIf="userName.errors?.['required'] && userName.touched" style="color: red;">username required</small>
+                <small *ngIf="userName.errors?.['minlength']" style="color: red;">username must be > 4 chars required</small>
+                <small *ngIf="userName.errors?.['forbiddenName']" style="color: red;">Invalid Name</small>
+            </label>
+        </div>
+        <div>
+            <label> Email:
+                <input type="text" formControlName="email" name="email">
+                <small *ngIf="email.errors?.['email'] && email.touched" style="color: red;">email invalid</small>
+            </label>
+        </div>
+        <div>
+            <label> Age:
+                <input type="text" formControlName="age" name="age">
+                <small *ngIf="age.errors?.['pattern'] && age.touched" style="color: red;">Invalid age</small>
+            </label>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <h3>{{age.errors|json}}</h3>
+</div>
