@@ -19,10 +19,10 @@ export const routes: Routes = [
     {path:'unauthorized',component:UnauthorizedComponent},
     {path:'store',component:StoreComponent,resolve:{productData:productResolver}},
     {path:'edit',component:EditProfileComponent,canDeactivate:[unsavedGuard]},
-    // {path:'manage',redirectTo:(route:ActivatedRouteSnapshot,state:RouterStateSnapshot)=>{
-    //     const isLoggedIn=true;
-    //     return isLoggedIn?'/resource':'/login';
-    // },pathMatch:'full'}
+    {path:'manage',redirectTo:()=>{
+        const isLoggedIn=false;
+        return isLoggedIn?'/resource':'/login';
+    },pathMatch:'full'},
 
     {path:'resource',component:ResourceComponent}
 

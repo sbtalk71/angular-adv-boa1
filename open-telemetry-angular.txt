@@ -1,0 +1,86 @@
+
+Open Telemetry with Angular Application
+
+A. Do the following to your angular application
+
+1. install the Open Telemetry support to the angular application
+npm install @opentelemetry/api 
+npm install @opentelemetry/sdk-trace-web 
+npm install @opentelemetry/exporter-trace-otlp-http
+npm install @opentelemetry/instrumentation-fetch
+npm install @opentelemetry/instrumentation-xml-http-request
+npm install @opentelemetry/instrumentation-user-interaction
+npm install @opentelemetry/resources
+npm install @opentelemetry/semantic-conventions
+
+2. Write the following configurations in src/app/otel-config.ts file and import it in main.ts
+
+import { WebTracerProvider } from "@opentelemetry/sdk-trace-web";
+import { ConsoleSpanExporter, SimpleSpanProcessor } from "@opentelemetry/sdk-trace-base";
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { registerInstrumentations } from "@opentelemetry/instrumentation";
+import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
+import { XMLHttpRequestInstrumentation } from "@opentelemetry/instrumentation-xml-http-request";
+import { UserInteractionInstrumentation } from "@opentelemetry/instrumentation-user-interaction";
+
+// Define OpenTelemetry Tracer Provider
+//const provider = new WebTracerProvider();
+
+// Define an OTLP exporter (change the URL based on your backend)
+const otlpExporter = new OTLPTraceExporter({
+  url: "http://localhost:4318/v1/traces",  // Replace with your OTEL collector URL
+});
+
+// Configure the span processor to export traces
+const provider = new WebTracerProvider({
+    spanProcessors: [new SimpleSpanProcessor(new ConsoleSpanExporter()),new SimpleSpanProcessor(otlpExporter)]
+  });
+
+// Register the provider
+provider.register();
+
+// Enable automatic instrumentation for HTTP and UI interactions
+registerInstrumentations({
+  instrumentations: [
+    new FetchInstrumentation(),
+    new XMLHttpRequestInstrumentation(),
+    new UserInteractionInstrumentation(),
+  ],
+});
+
+console.log("OpenTelemetry initialized successfully!");
+
+2. Add the following component code to your app.component.ts
+
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "app-root",
+  template: `
+    <h1>Angular OpenTelemetry Demo</h1>
+    <button (click)="makeApiCall()">Make API Call</button>
+  `,
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent {
+  makeApiCall() {
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+      .then((response) => response.json())
+      .then((data) => console.log("API Response:", data))
+      .catch((error) => console.error("API Error:", error));
+  }
+}
+
+3. run the application and make api calls and observe the metrics in browser console.
+
+4. configure the OTEL Collector (for your architecture, below is for windows):
+download the collector:
+https://github.com/open-telemetry/opentelemetry-collector-releases/releases/tag/v0.122.1
+
+5. install and configure:
+the default install location is c:\Program Files\OpenTelemetry
+
+6. Run the .exe from command prompt
+7. start your Angularapplication and call the Api, Your metrics will appear on the logging console of OTEL Collector.
+
+8. open the url http://localhost:55679/debug/tracez to view traces and spans
