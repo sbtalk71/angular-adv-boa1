@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
@@ -10,6 +10,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { unsavedGuard } from './guards/unsaved.guard';
 import { AppComponent } from './app.component';
 import { productResolver } from './resolvers/product.resolver';
+import { ResourceComponent } from './resource/resource.component';
 
 export const routes: Routes = [
     // {path:'',component:AppComponent},
@@ -17,5 +18,12 @@ export const routes: Routes = [
     {path:'admin',component:AdminComponent,canActivate:[authGuard,AuthGuard2]},
     {path:'unauthorized',component:UnauthorizedComponent},
     {path:'store',component:StoreComponent,resolve:{productData:productResolver}},
-    {path:'edit',component:EditProfileComponent,canDeactivate:[unsavedGuard]}
+    {path:'edit',component:EditProfileComponent,canDeactivate:[unsavedGuard]},
+    // {path:'manage',redirectTo:(route:ActivatedRouteSnapshot,state:RouterStateSnapshot)=>{
+    //     const isLoggedIn=true;
+    //     return isLoggedIn?'/resource':'/login';
+    // },pathMatch:'full'}
+
+    {path:'resource',component:ResourceComponent}
+
 ];
