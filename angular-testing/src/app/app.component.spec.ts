@@ -4,10 +4,7 @@ import { AppComponent } from "./app.component"
 
 xdescribe("App component tests",()=>{
   beforeAll(()=>{
-    TestBed.configureTestingModule({
-      imports:[],
-      declarations:[]
-    })
+    TestBed.configureTestingModule({})
   })
   it('should return true for app compmonent',()=>{
     const fixture=TestBed.createComponent(AppComponent);

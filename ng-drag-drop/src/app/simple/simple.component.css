@@ -1,0 +1,12 @@
+div{
+    width: 50%;
+    height: 100%;
+    background-color: rgb(32, 95, 74);
+    cursor: move;
+    display: flex;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-content: center;
+}

@@ -1,0 +1,11 @@
+@if(productResource.isLoading()){
+    <div>Loading Data....</div>
+}
+@if (productResource.error()) {
+    <div>Error: {{productResource.error()}}</div>
+}
+@if ((productResource.value())) {
+    <h3>{{productResource.value()?.title}}</h3>
+    <h3>{{productResource.value()?.price}}</h3>
+   
+}

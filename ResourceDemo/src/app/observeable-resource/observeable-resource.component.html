@@ -1,0 +1,10 @@
+@if(productResource.isLoading()){
+    <div>Loading Data....</div>
+}
+@if (productResource.error()) {
+    <div>Error: {{productResource.error()}}</div>
+}
+@for (product of productResource.value(); track $index) {
+    <h3>{{product.title}} : {{product.price}} </h3>
+      
+}
