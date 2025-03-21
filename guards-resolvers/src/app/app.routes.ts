@@ -13,9 +13,9 @@ import { productResolver } from './resolvers/product.resolver';
 import { ResourceComponent } from './resource/resource.component';
 
 export const routes: Routes = [
-    // {path:'',component:AppComponent},
+    {path:'',component:AppComponent},
     {path:'login',component:LoginComponent},
-    {path:'admin',component:AdminComponent,canActivate:[authGuard,AuthGuard2]},
+    {path:'admin',component:AdminComponent,canActivate:[authGuard]},
     {path:'unauthorized',component:UnauthorizedComponent},
     {path:'store',component:StoreComponent,resolve:{productData:productResolver}},
     {path:'edit',component:EditProfileComponent,canDeactivate:[unsavedGuard]},
