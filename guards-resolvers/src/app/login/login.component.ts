@@ -21,7 +21,7 @@ export class LoginComponent {
     this.auth.login(this.loginModel).subscribe({
       next: jwt=>{localStorage.setItem("token",jwt.token);
         console.log("now routing..");
-        this.router.navigate['/resource']},
+        this.router.navigate["resource"]},
       error:err=>console.log(err)
     });
   }
