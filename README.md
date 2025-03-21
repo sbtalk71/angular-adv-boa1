@@ -13,3 +13,13 @@ ng add @angular-architects/module-federation --project orders --type remote --po
     this.usermail = toSignal(this.userForm.get('email')!.valueChanges, { initialValue: '' });
     this.userAge = toSignal(this.userForm.get('age')!.valueChanges, { initialValue: '' })
     this.info=computed(()=>`${this.name()} ${this.usermail()} ${this.userAge()}`)
+	
+	
+ 
+
+Post Assessment(Day-5): https://forms.office.com/r/0XnZMp2Eep
+
+ 
+Feedback Link (Day-5) : https://forms.office.com/r/yxvMeMfNjB
+
+ 
