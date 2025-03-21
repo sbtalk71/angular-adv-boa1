@@ -19,7 +19,9 @@ export class LoginComponent {
   }
   onLogin(){
     this.auth.login(this.loginModel).subscribe({
-      next: jwt=>{localStorage.setItem("token",jwt.token);this.router.navigate['resource']},
+      next: jwt=>{localStorage.setItem("token",jwt.token);
+        console.log("now routing..");
+        this.router.navigate['/resource']},
       error:err=>console.log(err)
     });
   }
